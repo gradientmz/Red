@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs.kotlin'
 }
 
@@ -27,6 +28,7 @@ android {
     }
 
     buildFeatures {
+        viewBinding = true
         dataBinding = true
     }
 
@@ -74,7 +76,7 @@ dependencies {
 
     // Data binding
     kapt 'com.android.databinding:compiler:3.2.0-alpha10'
-    kapt 'androidx.databinding:databinding-common:4.0.0'
+    kapt 'androidx.databinding:databinding-common:4.1.1'
 
     // RecyclerView animator
     implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
