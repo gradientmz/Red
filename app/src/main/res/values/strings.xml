@@ -2,4 +2,13 @@
     <string name="app_name">Red</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <string-array name="icons">
+        <item>😃 Happy</item>
+        <item>🙂 Okay</item>
+        <item>😑 Upset</item>
+        <item>🌟 Other</item>
+        <item>🎄 Holidays</item>
+
+    </string-array>
 </resources>
