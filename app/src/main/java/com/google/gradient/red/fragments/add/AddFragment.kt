@@ -13,6 +13,10 @@ class addFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // set menu
+        setHasOptionsMenu(true)
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add, container, false)
     }

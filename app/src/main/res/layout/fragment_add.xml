@@ -5,15 +5,15 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24sp"
-
+    android:background="@color/lightpaper"
+    android:padding="18sp"
     tools:context=".fragments.add.addFragment">
 
     <EditText
         android:id="@+id/title_et"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="@android:color/transparent"
+        android:background="@drawable/custom_input"
         android:hint="Title"
         android:paddingHorizontal="12dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,17 +25,19 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/custom_input"
+        android:entries="@array/icons"
+        android:paddingHorizontal="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_et"
-        android:entries="@array/icons"/>
+        app:layout_constraintTop_toBottomOf="@+id/title_et" />
 
     <EditText
-        android:id="@+id/content_et"
+        android:id="@+id/update_content_et"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/transparent"
+        android:background="@drawable/custom_input"
         android:gravity="top|start"
         android:hint="Journal entry content"
         android:padding="12sp"

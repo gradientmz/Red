@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_search"
+        android:title="Search"
+        android:icon="@drawable/ic_search"
+        android:iconTint="@color/white"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_sortBy"
+            android:title="Sort By">
+            <menu>
+                <item
+                    android:id="@+id/happy"
+                    android:title="Happy"/>
+                <item
+                    android:id="@+id/okay"
+                    android:title="Okay"/>
+                <item
+                    android:id="@+id/upset"
+                    android:title="Upset"/>
+                <item
+                    android:id="@+id/other"
+                    android:title="Other"/>
+                <item
+                    android:id="@+id/holidays"
+                    android:title="Holidays"/>
+            </menu>
+        </item>
+    </group>
+
+    <item
+        android:id="@+id/menu_delete_all"
+        android:title="Delete all"
+        app:showAsAction="never">
+    </item>
+
+    <item
+        android:id="@+id/menu_support"
+        android:title="Red support"
+        app:showAsAction="never">
+    </item>
+</menu>
