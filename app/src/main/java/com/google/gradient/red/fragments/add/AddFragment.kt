@@ -1,9 +1,7 @@
 package com.google.gradient.red.fragments.add
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import com.google.gradient.red.R
 
@@ -19,5 +17,9 @@ class addFragment : Fragment() {
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add, container, false)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.add_fragment_menu, menu)
     }
 }
