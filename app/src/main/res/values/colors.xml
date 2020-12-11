@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    main/essential colors -->
     <color name="ink">#212121</color>
     <color name="red">#D81B60</color>
 
+    <!--    base colors -->
     <color name="black">#FF000000</color>
     <color name="paper">#ecebed</color>
     <color name="lightpaper">#f5f5f5</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--    mood colors -->
+    <color name="pgreen">#00C1F6</color>
+    <color name="pyellow">#77dd77</color>
+    <color name="pred">#ff6961</color>
 </resources>
