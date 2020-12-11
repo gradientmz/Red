@@ -13,6 +13,7 @@ import com.google.gradient.red.data.models.Mood
 import com.google.gradient.red.data.viewmodel.JournalViewModel
 import com.google.gradient.red.fragments.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
+import kotlinx.android.synthetic.main.fragment_add.view.*
 
 class addFragment : Fragment() {
 
@@ -29,8 +30,7 @@ class addFragment : Fragment() {
         // set menu
         setHasOptionsMenu(true)
 
-        // Uncommenting this lets SharedViewModel run, which changes color of mood picker
-//        view.mood_spinner.onItemSelectedListener = mSharedViewModel.listener
+        view.mood_spinner.onItemSelectedListener = mSharedViewModel.listener
 
         return view
     }
@@ -80,9 +80,9 @@ class addFragment : Fragment() {
     // Reads the mood spinner and assigns a mood value.
     private fun parseMood(mood: String): Mood {
         return when(mood) {
-            "\uD83D\uDE03 Happy" -> {Mood.HAPPY}
-            "\uD83D\uDE42 Okay" -> {Mood.OKAY}
-            "\uD83D\uDE11 Upset" -> {Mood.UPSET}
+            "Happy" -> {Mood.HAPPY}
+            "Okay" -> {Mood.OKAY}
+            "Upset" -> {Mood.UPSET}
             else -> {Mood.HAPPY}
         }
     }

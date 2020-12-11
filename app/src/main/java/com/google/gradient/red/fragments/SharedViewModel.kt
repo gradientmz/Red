@@ -20,7 +20,7 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             when(position) {
                 0 -> { (parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.pgreen)) }
-                1 -> { (parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.pyellow)) }
+                1 -> { (parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.pblue)) }
                 2 -> { (parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.pred)) }
             }
         }
