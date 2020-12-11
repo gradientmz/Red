@@ -4,7 +4,7 @@
     <color name="red">#D81B60</color>
 
     <color name="black">#FF000000</color>
-    <color name="paper">#E7E6E8</color>
+    <color name="paper">#ecebed</color>
     <color name="lightpaper">#f5f5f5</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
