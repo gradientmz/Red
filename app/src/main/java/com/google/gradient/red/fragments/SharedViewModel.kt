@@ -10,6 +10,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.google.gradient.red.R
 import com.google.gradient.red.data.models.Mood
 
+//  This file handles changing mood picker text color
 class SharedViewModel(application: Application): AndroidViewModel(application) {
 
     val listener: AdapterView.OnItemSelectedListener = object :
@@ -37,14 +38,10 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
     // Reads the mood spinner and assigns a mood value.
     private fun parseMood(mood: String): Mood {
         return when(mood) {
-            "\uD83D\uDE03 Happy" -> {
-                Mood.HAPPY}
-            "\uD83D\uDE42 Okay" -> {
-                Mood.OKAY}
-            "\uD83D\uDE11 Upset" -> {
-                Mood.UPSET}
-            else -> {
-                Mood.HAPPY}
+            "Happy" -> {Mood.HAPPY}
+            "Okay" -> {Mood.OKAY}
+            "Upset" -> {Mood.UPSET}
+            else -> {Mood.HAPPY}
         }
     }
 }
