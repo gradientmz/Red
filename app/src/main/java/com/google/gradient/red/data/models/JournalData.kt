@@ -1,4 +1,4 @@
-package com.google.gradient.red.data
+package com.google.gradient.red.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,4 +1,4 @@
-package com.google.gradient.red.data
+package com.google.gradient.red.data.models
 
 enum class Mood {
     HAPPY,

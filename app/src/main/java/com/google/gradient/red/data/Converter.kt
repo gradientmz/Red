@@ -1,6 +1,7 @@
 package com.google.gradient.red.data
 
 import androidx.room.TypeConverter
+import com.google.gradient.red.data.models.Mood
 
 class Converter {
 

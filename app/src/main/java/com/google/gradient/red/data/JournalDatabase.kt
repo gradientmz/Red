@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.google.gradient.red.data.models.JournalData
 
 @Database(entities = [JournalData::class], version = 1, exportSchema = false)
 @TypeConverters(Converter::class)

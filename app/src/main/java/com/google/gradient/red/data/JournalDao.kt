@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.google.gradient.red.data.models.JournalData
 
 @Dao
 interface JournalDao {
