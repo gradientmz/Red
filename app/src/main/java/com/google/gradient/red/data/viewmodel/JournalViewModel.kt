@@ -15,7 +15,7 @@ class JournalViewModel(application: Application): AndroidViewModel(application) 
     private val journalDao = JournalDatabase.getDatabase(application).JournalDao()
     private val repository: JournalRepository
 
-    private val getAllData: LiveData<List<JournalData>>
+    val getAllData: LiveData<List<JournalData>>
 
     init {
         repository = JournalRepository(journalDao)
