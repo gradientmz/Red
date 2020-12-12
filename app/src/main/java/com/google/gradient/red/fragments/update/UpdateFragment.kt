@@ -5,13 +5,11 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.gradient.red.R
-import com.google.gradient.red.data.viewmodel.JournalViewModel
 import com.google.gradient.red.fragments.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_update.view.*
 
 class updateFragment : Fragment() {
 
-    private val mJournalViewModel: JournalViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
 
     override fun onCreateView(

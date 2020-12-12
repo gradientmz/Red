@@ -2,6 +2,7 @@
 <resources>
     <!--    main/essential colors -->
     <color name="ink">#212121</color>
+    <color name="lightink">#535153</color>
     <color name="red">#D81B60</color>
 
     <!--    base colors -->
