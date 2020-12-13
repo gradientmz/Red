@@ -41,6 +41,7 @@
         android:gravity="top|start"
         android:hint="Journal entry content"
         android:padding="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
