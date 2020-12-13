@@ -1,5 +1,6 @@
 package com.google.gradient.red.fragments.update
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -44,9 +45,11 @@ class updateFragment : Fragment() {
         inflater.inflate(R.menu.update_fragment_menu, menu)
     }
 
+    // Controls buttons in menu, calls update and delete functions when needed
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.menu_save) {
-           updateItem()
+        when(item.itemId) {
+            R.id.menu_save -> updateItem()
+            R.id.menu_delete -> confirmItemRemoval()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -73,5 +76,23 @@ class updateFragment : Fragment() {
             } else {
                 Toast.makeText(requireContext(), "You have some empty fields.", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    // Opens an alert dialog asking if they want deletion, deletes if positive
+    private fun confirmItemRemoval() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yes") { _, _ ->
+            mJournalViewModel.deleteItem(args.currentItem)
+            Toast.makeText(
+                requireContext(),
+                "Your entry was successfully removed!",
+                Toast.LENGTH_SHORT
+            ).show()
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+        }
+        builder.setNegativeButton("No") { _, _ -> }
+        builder.setTitle("Entry deletion")
+        builder.setMessage("Are you sure you want to delete this journal entry?")
+        builder.create().show()
     }
 }

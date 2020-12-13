@@ -30,7 +30,7 @@
 
     <item
         android:id="@+id/menu_delete_all"
-        android:title="Delete all"
+        android:title="Blank slate"
         app:showAsAction="never">
     </item>
 

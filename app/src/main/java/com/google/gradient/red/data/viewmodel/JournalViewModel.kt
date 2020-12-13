@@ -34,4 +34,16 @@ class JournalViewModel(application: Application): AndroidViewModel(application) 
         }
     }
 
+    fun deleteItem(journalData: JournalData) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteItem(journalData)
+        }
+    }
+
+    fun deleteAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAll()
+        }
+    }
+
 }
