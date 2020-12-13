@@ -7,12 +7,22 @@ import android.widget.AdapterView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import com.google.gradient.red.R
+import com.google.gradient.red.data.models.JournalData
 import com.google.gradient.red.data.models.Mood
 
 //  This file handles changing mood picker text color
 class SharedViewModel(application: Application): AndroidViewModel(application) {
 
+    // Checks if journal database is empty
+    val emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(true)
+
+    fun checkIfDatabaseEmpty(journalData: List<JournalData>) {
+        emptyDatabase.value = journalData.isEmpty()
+    }
+
+    // Listens for when mood selector changes
     val listener: AdapterView.OnItemSelectedListener = object :
         AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(p0: AdapterView<*>?) {}

@@ -18,7 +18,4 @@ interface JournalDao {
 
     @Delete
     suspend fun deleteItem(journalData: JournalData)
-
-    @Query("DELETE FROM journal_table")
-    suspend fun deleteAll()
 }

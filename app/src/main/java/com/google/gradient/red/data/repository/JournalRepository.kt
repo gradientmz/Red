@@ -19,8 +19,4 @@ class JournalRepository(private val journalDao: JournalDao) {
     suspend fun deleteItem(journalData: JournalData) {
         journalDao.deleteItem(journalData)
     }
-
-    suspend fun deleteAll() {
-        journalDao.deleteAll()
-    }
 }
