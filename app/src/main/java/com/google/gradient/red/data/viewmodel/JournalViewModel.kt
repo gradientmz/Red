@@ -28,4 +28,10 @@ class JournalViewModel(application: Application): AndroidViewModel(application) 
         }
     }
 
+    fun updateData(journalData: JournalData) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateData(journalData)
+        }
+    }
+
 }

@@ -36,12 +36,21 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
     }
 
     // Reads the mood spinner and assigns a mood value.
-    private fun parseMood(mood: String): Mood {
+    fun parseMood(mood: String): Mood {
         return when(mood) {
             "Happy" -> {Mood.HAPPY}
             "Okay" -> {Mood.OKAY}
             "Upset" -> {Mood.UPSET}
             else -> {Mood.HAPPY}
+        }
+    }
+
+    // Parses mood, and returns integer value of mood selected
+    fun parseMood(mood: Mood): Int {
+        return when(mood) {
+            Mood.HAPPY -> 0
+            Mood.OKAY -> 1
+            Mood.UPSET -> 2
         }
     }
 }

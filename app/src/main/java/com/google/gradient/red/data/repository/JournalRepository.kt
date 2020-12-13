@@ -11,4 +11,8 @@ class JournalRepository(private val journalDao: JournalDao) {
     suspend fun insertData(journalData: JournalData) {
         journalDao.insertData(journalData)
     }
+
+    suspend fun updateData(journalData: JournalData) {
+        journalDao.updateData(journalData)
+    }
 }
