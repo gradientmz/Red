@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--    main/essential colors -->
-    <color name="ink">#212121</color>
+    <color name="ink">#232526</color>
     <color name="lightink">#535153</color>
     <color name="red">#D81B60</color>
 
@@ -13,7 +13,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--    mood colors -->
-    <color name="pgreen">#77dd77</color>
-    <color name="pblue">#00C1F6</color>
-    <color name="pred">#ff6961</color>
+    <color name="pgreen">#4DC089</color>
+    <color name="pblue">#43B2E9</color>
+    <color name="pred">#E14648</color>
 </resources>

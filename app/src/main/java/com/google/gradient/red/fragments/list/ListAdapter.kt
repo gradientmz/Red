@@ -1,9 +1,11 @@
 package com.google.gradient.red.fragments.list
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gradient.red.R
 import com.google.gradient.red.data.models.JournalData
@@ -27,10 +29,15 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         return dataList.size
     }
 
-    // Gets values from views and writes them in room db
+    // Does various things, including writing room changes and determining correct entry
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.itemView.title_txt.text = dataList[position].title
         holder.itemView.description_txt.text = dataList[position].description
+        holder.itemView.row_background.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(dataList[position])
+            holder.itemView.findNavController().navigate(action)
+            Log.d("Entry Clicked", "A journal entry was clicked, taking the user to the update fragment.")
+        }
 
         // Sets color of mood indicator card (dot) based on saved mood
         val mood = dataList[position].mood
