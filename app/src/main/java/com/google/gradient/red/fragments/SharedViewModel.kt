@@ -16,7 +16,7 @@ import com.google.gradient.red.data.models.Mood
 class SharedViewModel(application: Application): AndroidViewModel(application) {
 
     // Checks if journal database is empty
-    val emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(true)
+    val emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun checkIfDatabaseEmpty(journalData: List<JournalData>) {
         emptyDatabase.value = journalData.isEmpty()
