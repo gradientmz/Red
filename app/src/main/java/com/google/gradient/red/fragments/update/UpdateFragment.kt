@@ -17,10 +17,10 @@ import kotlinx.android.synthetic.main.fragment_update.view.*
 
 class updateFragment : Fragment() {
 
+    // Variables used later
     private val mSharedViewModel: SharedViewModel by viewModels()
     private val mJournalViewModel: JournalViewModel by viewModels()
     private val args by navArgs<updateFragmentArgs>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +54,7 @@ class updateFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    // Called when updating save entry (called when check clicked)
     private fun updateItem() {
         val title = current_title_et.text.toString()
         val description = current_description_et.text.toString()

@@ -90,10 +90,7 @@ class ListFragment : Fragment() {
         val swipeToDeleteCallback = object : SwipeToDelete() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val deletedItem = adapter.dataList[viewHolder.adapterPosition]
-                // Delete item
                 mJournalViewModel.deleteItem(deletedItem)
-                adapter.notifyItemRemoved(viewHolder.adapterPosition)
-                // Restore delete item with "undo"
                 restoreDeletedData(viewHolder.itemView, deletedItem, viewHolder.adapterPosition)
             }
         }

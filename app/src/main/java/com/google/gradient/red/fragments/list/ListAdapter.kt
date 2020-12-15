@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gradient.red.R
 import com.google.gradient.red.data.models.JournalData
 import com.google.gradient.red.data.models.Mood
+import com.google.gradient.red.fragments.list.adapter.JournalDiffUtil
 import kotlinx.android.synthetic.main.row_layout.view.*
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
@@ -55,7 +57,9 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     }
 
     fun setData(journalData: List<JournalData>) {
+        val journalDiffUtil = JournalDiffUtil(dataList, journalData)
+        val journalDiffResult = DiffUtil.calculateDiff(journalDiffUtil)
         this.dataList = journalData
-        notifyDataSetChanged()
+        journalDiffResult.dispatchUpdatesTo(this)
     }
 }
