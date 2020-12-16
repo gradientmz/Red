@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_add"
+        android:id="@+id/menu_search"
         android:title="Search"
         android:icon="@drawable/ic_search"
         android:iconTint="@color/white"
@@ -16,14 +16,11 @@
             android:title="Sort By">
             <menu>
                 <item
-                    android:id="@+id/happy"
-                    android:title="Happy"/>
+                    android:id="@+id/sort_goodmood"
+                    android:title="Good mood"/>
                 <item
-                    android:id="@+id/okay"
-                    android:title="Okay"/>
-                <item
-                    android:id="@+id/upset"
-                    android:title="Upset"/>
+                    android:id="@+id/sort_badmood"
+                    android:title="Bad mood"/>
             </menu>
         </item>
     </group>

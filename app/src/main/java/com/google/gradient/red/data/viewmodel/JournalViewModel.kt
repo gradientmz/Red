@@ -15,11 +15,16 @@ class JournalViewModel(application: Application): AndroidViewModel(application) 
     private val journalDao = JournalDatabase.getDatabase(application).JournalDao()
     private val repository: JournalRepository
 
+    val sortByGoodMood: LiveData<List<JournalData>>
+    val sortByBadMood: LiveData<List<JournalData>>
+
     val getAllData: LiveData<List<JournalData>>
 
     init {
         repository = JournalRepository(journalDao)
         getAllData = repository.getAllData
+        sortByGoodMood = repository.sortByGoodMood
+        sortByBadMood = repository.sortByBadMood
     }
 
     fun insertData(journalData: JournalData) {
@@ -38,6 +43,10 @@ class JournalViewModel(application: Application): AndroidViewModel(application) 
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteItem(journalData)
         }
+    }
+
+    fun searchDatabase(searchQuery: String): LiveData<List<JournalData>> {
+        return repository.searchDatabase(searchQuery)
     }
 
 }
