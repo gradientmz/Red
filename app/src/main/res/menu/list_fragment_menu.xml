@@ -26,8 +26,8 @@
     </group>
 
     <item
-        android:id="@+id/menu_support"
-        android:title="Red support"
+        android:id="@+id/menu_contact"
+        android:title="Contact developer"
         app:showAsAction="never">
     </item>
 </menu>
