@@ -115,9 +115,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             // Open Red Support
-            R.id.menu_contact -> {
-                context?.let { openLink("https://docs.google.com/forms/d/e/1FAIpQLSelTC1qZ2tDnfuPqG2b7Ai5WWslhN1G4_iMgmyYQMM0dieFig/viewform?usp=sf_link", it) }
-            }
+            R.id.menu_contact -> { context?.let { openLink("https://docs.google.com/forms/d/e/1FAIpQLSelTC1qZ2tDnfuPqG2b7Ai5WWslhN1G4_iMgmyYQMM0dieFig/viewform?usp=sf_link", it) } }
+            R.id.menu_info -> { context?.let { openLink("https://twitter.com/gradientmz", it) } }
 
             // Sort options
             R.id.sort_goodmood -> { mJournalViewModel.sortByGoodMood.observe(this, Observer { adapter.setData(it) }) }

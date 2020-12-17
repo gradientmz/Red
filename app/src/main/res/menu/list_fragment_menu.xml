@@ -26,6 +26,12 @@
     </group>
 
     <item
+        android:id="@+id/menu_info"
+        android:title="Twitter"
+        app:showAsAction="never">
+    </item>
+
+    <item
         android:id="@+id/menu_contact"
         android:title="Contact developer"
         app:showAsAction="never">
