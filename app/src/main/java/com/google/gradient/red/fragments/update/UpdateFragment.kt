@@ -60,6 +60,7 @@ class updateFragment : Fragment() {
         val description = current_description_et.text.toString()
         val getMood = current_mood_spinner.selectedItem.toString()
         val validation = mSharedViewModel.verifyDataFromUser(title, description)
+        val editedDate = args.currentItem.date
 
         // Updates current item
         if (validation) {
@@ -67,7 +68,8 @@ class updateFragment : Fragment() {
                 args.currentItem.id,
                 title,
                 mSharedViewModel.parseMood(getMood),
-                description
+                description,
+                editedDate
             )
             mJournalViewModel.updateData(updatedItem)
             Toast.makeText(requireContext(), "Entry successfully edited!", Toast.LENGTH_SHORT).show()

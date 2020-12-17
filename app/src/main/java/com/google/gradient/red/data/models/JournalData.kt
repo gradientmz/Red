@@ -7,10 +7,11 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "journal_table")
 @Parcelize
-data class JournalData (
+data class JournalData(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     var title: String,
     var mood: Mood,
-    var description: String
+    var description: String,
+    var date: String
 ): Parcelable

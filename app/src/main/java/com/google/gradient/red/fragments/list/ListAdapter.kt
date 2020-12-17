@@ -40,6 +40,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
             holder.itemView.findNavController().navigate(action)
             Log.d("Entry Clicked", "A journal entry was clicked, taking the user to the update fragment.")
         }
+        holder.itemView.date.text = dataList[position].date
 
         // Sets color of mood indicator card (dot) based on saved mood
         val mood = dataList[position].mood

@@ -1,7 +1,6 @@
 package com.google.gradient.red.fragments
 
 import android.app.Application
-import android.text.TextUtils
 import android.view.View
 import android.widget.AdapterView
 import android.widget.TextView
@@ -40,9 +39,7 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
 
     // Gets title and description as parameters and checks if either is empty
     fun verifyDataFromUser(title: String, description: String): Boolean {
-        return if(TextUtils.isEmpty(title) || TextUtils.isEmpty(description)) {
-            false
-        } else !(title.isEmpty() || description.isEmpty())
+        return !(title.isEmpty() || description.isEmpty())
     }
 
     // Reads the mood spinner and assigns a mood value.

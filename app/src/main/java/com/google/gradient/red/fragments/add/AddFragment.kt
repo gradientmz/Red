@@ -14,11 +14,14 @@ import com.google.gradient.red.data.viewmodel.JournalViewModel
 import com.google.gradient.red.fragments.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class addFragment : Fragment() {
 
     private val mJournalViewModel: JournalViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
+    var currentDate: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +34,10 @@ class addFragment : Fragment() {
         setHasOptionsMenu(true)
 
         view.mood_spinner.onItemSelectedListener = mSharedViewModel.listener
+
+        // Set date and time for currentDate
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm a")
+        currentDate = sdf.format(Date())
 
         return view
     }
@@ -53,6 +60,7 @@ class addFragment : Fragment() {
         val mTitle = title_et.text.toString()
         val mMood = mood_spinner.selectedItem.toString()
         val mDescription = description_et.text.toString()
+        val mDate = currentDate.toString()
 
         val validation = mSharedViewModel.verifyDataFromUser(mTitle, mDescription)
         if(validation) {
@@ -60,7 +68,8 @@ class addFragment : Fragment() {
                 0,
                 mTitle,
                 parseMood(mMood),
-                mDescription
+                mDescription,
+                mDate
             )
             mJournalViewModel.insertData(newData)
             Toast.makeText(requireContext(), "New entry added!", Toast.LENGTH_SHORT).show()
