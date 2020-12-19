@@ -42,10 +42,64 @@
         android:hint="Journal entry content"
         android:padding="12sp"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/image_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mood_spinner" />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="300sp"-->
+<!--        android:layout_height="300sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/image_et"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_input"
+        android:text="Entry image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description_et"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/imageStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pick journal entry image:"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="10sp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            app:cardCornerRadius="999sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="@color/lightink"
+            android:layout_margin="10sp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="35sp"
+                android:layout_height="35sp"
+                android:src="@drawable/ic_me"
+                android:layout_gravity="center"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

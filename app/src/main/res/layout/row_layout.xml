@@ -65,14 +65,27 @@
             android:layout_marginTop="8sp"
             android:layout_marginEnd="16sp"
             android:layout_marginBottom="16sp"
+            android:paddingBottom="16sp"
             android:ellipsize="end"
             android:maxLines="10"
             android:text="10/1/2007 12:00 AM"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/title_txt"
             app:layout_constraintTop_toBottomOf="@+id/description_txt" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="190sp"
+            android:background="@color/lightpaper"
+            app:layout_constraintTop_toBottomOf="@id/date"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="16sp"
+            android:layout_marginBottom="16sp"
+            android:src="@drawable/ic_me"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

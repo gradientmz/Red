@@ -1,5 +1,7 @@
 package com.google.gradient.red.fragments.add
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
@@ -39,7 +41,23 @@ class addFragment : Fragment() {
         val sdf = SimpleDateFormat("dd/M/yyyy hh:mm a")
         currentDate = sdf.format(Date())
 
+        // Opens gallery when image button clicked, gets image
+        view.image_et.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, 1218)
+        }
+
         return view
+    }
+
+    // If image picked
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 1218) {
+            imageView.setImageURI(data?.data) // handle chosen image
+            imageStatus.text = "Image selected!"
+        }
     }
 
     // Creates check mark at the top of the fragment
