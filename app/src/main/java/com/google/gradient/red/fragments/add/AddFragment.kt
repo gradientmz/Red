@@ -55,8 +55,8 @@ class addFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == 1218) {
-            imageView.setImageURI(data?.data) // handle chosen image
-            imageStatus.text = "Image selected!"
+//            imageView.setImageURI(data?.data) // handle chosen image
+            image_et.text = "Image selected!"
         }
     }
 
