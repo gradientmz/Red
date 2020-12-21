@@ -1,12 +1,10 @@
 package com.google.gradient.red.fragments.add
 
 import android.Manifest
-import android.app.Activity.RESULT_OK
+import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
@@ -18,6 +16,7 @@ import com.google.gradient.red.data.models.JournalData
 import com.google.gradient.red.data.models.Mood
 import com.google.gradient.red.data.viewmodel.JournalViewModel
 import com.google.gradient.red.fragments.SharedViewModel
+import com.google.gradient.red.pathFromUri
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
 import pub.devrel.easypermissions.AppSettingsDialog
@@ -25,14 +24,12 @@ import pub.devrel.easypermissions.EasyPermissions
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks {
 
     private val mJournalViewModel: JournalViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
     var currentDate: String? = null
-
-    private var READ_STORAGE_PERM = 123
-    private var REQUEST_CODE_IMAGE = 456
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,9 +50,24 @@ class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermiss
         // Opens gallery when image button clicked, gets image
         view.image_et.setOnClickListener {
             readStorageTask()
+            //Intent to pick image
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, 1001)
         }
 
         return view
+    }
+
+    // Handle result of picked image
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == 1001) {
+
+            pathFromUri(requireContext(), data?.data)?.let {
+                val bitmap = BitmapFactory.decodeFile(it)
+                preview_image.setImageBitmap(bitmap)
+            }
+        }
     }
 
     // Creates check mark at the top of the fragment
@@ -70,6 +82,7 @@ class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermiss
         }
         return super.onOptionsItemSelected(item)
     }
+
 
     // uses below function to check if text is empty, and gets values from add fragment
     private fun insertDataToDb() {
@@ -105,9 +118,15 @@ class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermiss
     // Reads the mood spinner and assigns a mood value.
     private fun parseMood(mood: String): Mood {
         return when(mood) {
-            "Happy" -> {Mood.HAPPY}
-            "Okay" -> {Mood.OKAY}
-            "Upset" -> {Mood.UPSET}
+            "Happy" -> {
+                Mood.HAPPY
+            }
+            "Okay" -> {
+                Mood.OKAY
+            }
+            "Upset" -> {
+                Mood.UPSET
+            }
             else -> {Mood.HAPPY}
         }
     }
@@ -121,12 +140,20 @@ class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermiss
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, requireActivity())
+        EasyPermissions.onRequestPermissionsResult(
+            requestCode,
+            permissions,
+            grantResults,
+            requireActivity()
+        )
     }
 
-    // These two functions check whether the user has permissions using EasyPermissions
+    // This function checks whether the user has permissions using EasyPermissions
     private fun hasReadStoragePerm(): Boolean {
-        return EasyPermissions.hasPermissions(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+        return EasyPermissions.hasPermissions(
+            requireContext(),
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
     }
 
     // Checks if the user has permissions and asks for them if not
@@ -137,50 +164,9 @@ class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermiss
             EasyPermissions.requestPermissions(
                 requireActivity(),
                 "This app needs access to your storage to be able to pick pictures.",
-                READ_STORAGE_PERM,
+                1001,
                 Manifest.permission.READ_EXTERNAL_STORAGE
             )
-        }
-    }
-
-    // Uses intent to pick image from gallery
-    private fun pickImageFromGallery() {
-        var intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        if (intent.resolveActivity(requireActivity().packageManager) != null) {
-            startActivityForResult(intent, REQUEST_CODE_IMAGE)
-        }
-    }
-
-    private fun getPathFromUri(contentUri: Uri): String? {
-        var filePath: String? = null
-        var cursor = requireActivity().contentResolver.query(contentUri, null, null, null, null)
-        if (cursor == null) {
-            filePath = contentUri.path
-        } else {
-            cursor.moveToFirst()
-            var index = cursor.getColumnIndex("_data")
-            filePath = cursor.getString(index)
-            cursor.close()
-        }
-        return filePath
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_IMAGE && requestCode == RESULT_OK) {
-            if (data != null) {
-                var selectedImageUrl = data.data
-                if (selectedImageUrl != null) {
-                    try {
-                        var inputStream = requireActivity().contentResolver.openInputStream(selectedImageUrl)
-                        var bitmap = BitmapFactory.decodeStream(inputStream)
-                        preview_image.setImageBitmap(bitmap)
-                        preview_image.visibility = View.VISIBLE
-                    } catch (e: Exception) {
-
-                    }
-                }
-            }
         }
     }
 
