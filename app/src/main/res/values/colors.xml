@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--    main/essential colors -->
-    <color name="ink">#121520</color>
+    <color name="ink">#141414</color>
     <color name="lightink">#535153</color>
-    <color name="red">#D81B60</color>
+    <color name="red">#E91E62</color>
 
     <!--    base colors -->
     <color name="black">#FF000000</color>

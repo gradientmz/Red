@@ -81,6 +81,6 @@ dependencies {
     // RecyclerView animator
     implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
 
-    // Coil for images
-    implementation("io.coil-kt:coil:1.1.0")
+    // Easy permissions
+    implementation 'pub.devrel:easypermissions:3.0.0'
 }

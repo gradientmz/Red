@@ -12,10 +12,10 @@
         android:id="@+id/title_et"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginHorizontal="18sp"
+        android:layout_marginTop="18sp"
         android:background="@drawable/custom_input"
         android:hint="Title"
-        android:layout_marginTop="18sp"
-        android:layout_marginHorizontal="18sp"
         android:paddingHorizontal="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,11 +25,11 @@
         android:id="@+id/mood_spinner"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginHorizontal="18sp"
         android:layout_marginTop="8dp"
         android:background="@drawable/custom_input"
         android:entries="@array/icons"
         android:paddingHorizontal="12dp"
-        android:layout_marginHorizontal="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_et" />
@@ -38,36 +38,45 @@
         android:id="@+id/description_et"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginHorizontal="18sp"
         android:layout_marginTop="8dp"
         android:background="@drawable/custom_input"
         android:gravity="top|start"
         android:hint="Journal entry content"
         android:padding="12sp"
         android:textSize="16sp"
-        android:layout_marginHorizontal="18sp"
         app:layout_constraintBottom_toTopOf="@id/image_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mood_spinner" />
 
+    <ImageView
+        android:id="@+id/preview_image"
+        android:layout_width="200sp"
+        android:layout_height="200sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
+
     <Button
         android:id="@+id/image_et"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginHorizontal="18sp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16sp"
-        android:layout_marginHorizontal="18sp"
         android:backgroundTint="@color/paper"
-        android:textColor="@color/lightink"
+        android:gravity="left|center"
         android:text="Entry image"
+        android:textAllCaps="false"
+        android:textColor="@color/lightink"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_et"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        android:gravity="left|center"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/description_et" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

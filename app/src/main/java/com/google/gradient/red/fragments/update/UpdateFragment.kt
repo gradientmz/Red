@@ -1,6 +1,8 @@
 package com.google.gradient.red.fragments.update
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -37,7 +39,23 @@ class updateFragment : Fragment() {
         view.current_mood_spinner.setSelection(mSharedViewModel.parseMood(args.currentItem.mood))
         view.current_mood_spinner.onItemSelectedListener = mSharedViewModel.listener
 
+        // Opens gallery when image button clicked, gets image
+        view.current_image_et.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, 1218)
+        }
+
         return view
+    }
+
+    // If image picked
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 1218) {
+//            imageView.setImageURI(data?.data) // handle chosen image
+            current_image_et.text = "Image selected!"
+        }
     }
 
     // Creates check mark at the top of the fragment
