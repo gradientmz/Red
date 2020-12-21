@@ -10,13 +10,12 @@ Red is a fully-featured, lightweight journal app. It will have the ability to ta
 
 ## More
 
-Red will be **completely free.** In addition, it will also have **no ads at all,** and we will not collect or sell your data in any way. 
+Red will be **completely free.** In addition, it will also have **no ads at all,** and we will not collect or sell your data in any way.
 
 ## Features coming soon:
 - Journal notifications
-- Entry color icons
-- Video and image attachments
+- Image attachments
 - Written notes
-- Support google form
+- And more!
 
 © Xinyun (Mark) Zhou. All rights reserved.
