@@ -12,6 +12,10 @@ Red is a fully-featured, lightweight journal app. It will have the ability to ta
 
 Red will be **completely free.** In addition, it will also have **no ads at all,** and we will not collect or sell your data in any way.
 
+## Trello board:
+There are some features coming to the app listed below, but this board will have the most updated and detailed info. 
+https://trello.com/b/y45hB9DM/red-roadmap
+
 ## Features coming soon:
 - Journal notifications
 - Image attachments
