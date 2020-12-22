@@ -31,6 +31,7 @@ class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermiss
     private val mJournalViewModel: JournalViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
     var currentDate: String? = null
+    var bitmap = BitmapFactory.decodeFile(R.drawable.redbitmap.toString())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,7 +81,7 @@ class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermiss
                             os.use {
                                 inputStream.copyTo(it)
                             }
-                            val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                            bitmap = BitmapFactory.decodeFile(file.absolutePath)
                             preview_image.setImageBitmap(bitmap)
                         }
                     }
@@ -117,7 +118,8 @@ class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermiss
                 mTitle,
                 parseMood(mMood),
                 mDescription,
-                mDate
+                mDate,
+                bitmap
             )
             mJournalViewModel.insertData(newData)
             Toast.makeText(requireContext(), "New entry added!", Toast.LENGTH_SHORT).show()

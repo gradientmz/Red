@@ -3,7 +3,9 @@ package com.google.gradient.red.fragments.update
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -14,8 +16,10 @@ import com.google.gradient.red.R
 import com.google.gradient.red.data.models.JournalData
 import com.google.gradient.red.data.viewmodel.JournalViewModel
 import com.google.gradient.red.fragments.SharedViewModel
+import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_update.*
 import kotlinx.android.synthetic.main.fragment_update.view.*
+import java.io.File
 
 class updateFragment : Fragment() {
 
@@ -23,6 +27,7 @@ class updateFragment : Fragment() {
     private val mSharedViewModel: SharedViewModel by viewModels()
     private val mJournalViewModel: JournalViewModel by viewModels()
     private val args by navArgs<updateFragmentArgs>()
+    var bitmap = BitmapFactory.decodeFile(R.drawable.redbitmap.toString())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,12 +54,32 @@ class updateFragment : Fragment() {
         return view
     }
 
-    // If image picked
+    // Handle result of picked image
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == 1218) {
-//            imageView.setImageURI(data?.data) // handle chosen image
-            current_image_et.text = "Image selected!"
+        if (resultCode == Activity.RESULT_OK && requestCode == 1001) {
+
+            // Converts image URI to bitmap
+            if (data != null && data.data != null) {
+                val uri = data.data!!
+                val inputStream = requireContext().contentResolver.openInputStream(uri)
+                val cursor = requireContext().contentResolver.query(uri, null, null, null, null)
+                cursor?.use { c ->
+                    val nameIndex = c.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    if (c.moveToFirst()) {
+                        val name = c.getString(nameIndex)
+                        inputStream?.let { inputStream ->
+                            // create same file with same name
+                            val file = File(requireContext().cacheDir, name)
+                            val os = file.outputStream()
+                            os.use {
+                                inputStream.copyTo(it)
+                            }
+                            bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                            preview_image.setImageBitmap(bitmap)
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -87,7 +112,8 @@ class updateFragment : Fragment() {
                 title,
                 mSharedViewModel.parseMood(getMood),
                 description,
-                editedDate
+                editedDate,
+                bitmap
             )
             mJournalViewModel.updateData(updatedItem)
             Toast.makeText(requireContext(), "Entry successfully edited!", Toast.LENGTH_SHORT).show()

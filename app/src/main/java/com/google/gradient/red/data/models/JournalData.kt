@@ -1,5 +1,6 @@
 package com.google.gradient.red.data.models
 
+import android.graphics.Bitmap
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -13,5 +14,6 @@ data class JournalData(
     var title: String,
     var mood: Mood,
     var description: String,
-    var date: String
+    var date: String,
+    var image: Bitmap
 ): Parcelable
