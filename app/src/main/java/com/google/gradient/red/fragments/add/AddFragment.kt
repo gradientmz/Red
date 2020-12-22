@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
@@ -16,11 +17,11 @@ import com.google.gradient.red.data.models.JournalData
 import com.google.gradient.red.data.models.Mood
 import com.google.gradient.red.data.viewmodel.JournalViewModel
 import com.google.gradient.red.fragments.SharedViewModel
-import com.google.gradient.red.pathFromUri
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -63,9 +64,27 @@ class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermiss
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == 1001) {
 
-            pathFromUri(requireContext(), data?.data)?.let {
-                val bitmap = BitmapFactory.decodeFile(it)
-                preview_image.setImageBitmap(bitmap)
+            // Converts image URI to bitmap
+            if (data != null && data.data != null) {
+                val uri = data.data!!
+                val inputStream = requireContext().contentResolver.openInputStream(uri)
+                val cursor = requireContext().contentResolver.query(uri, null, null, null, null)
+                cursor?.use { c ->
+                    val nameIndex = c.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    if (c.moveToFirst()) {
+                        val name = c.getString(nameIndex)
+                        inputStream?.let { inputStream ->
+                            // create same file with same name
+                            val file = File(requireContext().cacheDir, name)
+                            val os = file.outputStream()
+                            os.use {
+                                inputStream.copyTo(it)
+                            }
+                            val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                            preview_image.setImageBitmap(bitmap)
+                        }
+                    }
+                }
             }
         }
     }
