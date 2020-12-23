@@ -43,8 +43,11 @@ class updateFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_update, container, false)
 
-        // set menu
+        // Set menu
         setHasOptionsMenu(true)
+
+        // Set bitmap
+        bitmap = args.currentItem.image
 
         view.current_title_et.setText(args.currentItem.title)
         view.current_description_et.setText(args.currentItem.description)
