@@ -2,7 +2,9 @@ package com.google.gradient.red.fragments.update
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.OpenableColumns
@@ -22,12 +24,17 @@ import kotlinx.android.synthetic.main.fragment_update.view.*
 import java.io.File
 
 class updateFragment : Fragment() {
+    lateinit var bitmap: Bitmap
 
     // Variables used later
     private val mSharedViewModel: SharedViewModel by viewModels()
     private val mJournalViewModel: JournalViewModel by viewModels()
     private val args by navArgs<updateFragmentArgs>()
-    var bitmap = BitmapFactory.decodeFile(R.drawable.redbitmap.toString())
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        var bitmap: Bitmap? = null
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

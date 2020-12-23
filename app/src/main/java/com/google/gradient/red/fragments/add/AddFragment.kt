@@ -2,7 +2,9 @@ package com.google.gradient.red.fragments.add
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.OpenableColumns
@@ -27,11 +29,16 @@ import java.util.*
 
 
 class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks {
+    lateinit var bitmap: Bitmap
 
     private val mJournalViewModel: JournalViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
     var currentDate: String? = null
-    var bitmap = BitmapFactory.decodeFile(R.drawable.redbitmap.toString())
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        var bitmap: Bitmap? = null
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
