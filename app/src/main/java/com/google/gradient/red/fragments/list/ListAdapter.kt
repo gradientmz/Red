@@ -41,6 +41,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
             Log.d("Entry Clicked", "A journal entry was clicked, taking the user to the update fragment.")
         }
         holder.itemView.date.text = dataList[position].date
+        holder.itemView.image.setImageBitmap(dataList[position].image)
 
         // Sets color of mood indicator card (dot) based on saved mood
         val mood = dataList[position].mood
