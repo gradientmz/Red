@@ -6,9 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.ThumbnailUtils
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.text.TextUtils
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -88,7 +90,8 @@ class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermiss
                             os.use {
                                 inputStream.copyTo(it)
                             }
-                            bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                            val bitmapUnprocessed = BitmapFactory.decodeFile(file.absolutePath)
+                            bitmap = resizedBitmap(bitmapUnprocessed)
                             preview_image.setImageBitmap(bitmap)
                         }
                     }
@@ -157,6 +160,26 @@ class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermiss
             }
             else -> {Mood.HAPPY}
         }
+    }
+
+    // Resizes bitmap height to 1440 (2k res) and width based on dimensions
+    fun resizedBitmap(bitmap: Bitmap): Bitmap {
+        val width = bitmap.width
+        val height = bitmap.height
+        var bitmapResized: Bitmap? = null
+
+        Log.v("Image size return", "width: {$width}, height: {$height}")
+
+        val scale: Double = 1080 / bitmap.height.toDouble()
+        val scaleWidth: Double = scale * width
+        val scaleHeight: Double = scale * height
+
+        bitmapResized = ThumbnailUtils.extractThumbnail(bitmap, scaleWidth.toInt(),
+            scaleHeight.toInt()
+        )
+
+        Log.v("Value on the right should return 1080", bitmapResized.height.toString())
+        return bitmapResized
     }
 
     // SECTION FOR PERMISSIONS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
