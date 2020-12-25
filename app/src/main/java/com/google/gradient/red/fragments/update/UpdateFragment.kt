@@ -46,7 +46,7 @@ class updateFragment : Fragment() {
         // Set menu
         setHasOptionsMenu(true)
 
-        // Set bitmap
+        // Get bitmap
         bitmap = args.currentItem.image
 
         view.current_title_et.setText(args.currentItem.title)
