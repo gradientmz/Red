@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gradient.red.R
@@ -23,7 +24,13 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_layout, parent, false))
+        return MyViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.row_layout,
+                parent,
+                false
+            )
+        )
     }
 
     // Gets number of items in db
@@ -38,23 +45,45 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         holder.itemView.row_background.setOnClickListener {
             val action = ListFragmentDirections.actionListFragmentToUpdateFragment(dataList[position])
             holder.itemView.findNavController().navigate(action)
-            Log.d("Entry Clicked", "A journal entry was clicked, taking the user to the update fragment.")
+            Log.d(
+                "Entry Clicked",
+                "A journal entry was clicked, taking the user to the update fragment."
+            )
         }
         holder.itemView.date.text = dataList[position].date
-        holder.itemView.image.setImageBitmap(dataList[position].image)
+
+        // Checks if image exists
+        if (dataList[position].image.width > 0) {
+            holder.itemView.image.setImageBitmap(dataList[position].image)
+        }
+
+        val palette = Palette.Builder(dataList[position].image).generate()
+        val dominantSwatch = palette.dominantSwatch
+        val color = dominantSwatch!!.rgb
+
+        holder.itemView.imagecard.setCardBackgroundColor(color)
 
         // Sets color of mood indicator card (dot) based on saved mood
         val mood = dataList[position].mood
         when(mood) {
-            Mood.HAPPY -> holder.itemView.mood_indicator.setCardBackgroundColor(ContextCompat.getColor(
-                holder.itemView.context,
-                R.color.pgreen))
-            Mood.OKAY -> holder.itemView.mood_indicator.setCardBackgroundColor(ContextCompat.getColor(
-                holder.itemView.context,
-                R.color.pblue))
-            Mood.UPSET -> holder.itemView.mood_indicator.setCardBackgroundColor(ContextCompat.getColor(
-                holder.itemView.context,
-                R.color.pred))
+            Mood.HAPPY -> holder.itemView.mood_indicator.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.pgreen
+                )
+            )
+            Mood.OKAY -> holder.itemView.mood_indicator.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.pblue
+                )
+            )
+            Mood.UPSET -> holder.itemView.mood_indicator.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.pred
+                )
+            )
         }
     }
 
