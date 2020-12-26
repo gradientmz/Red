@@ -93,6 +93,7 @@ class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermiss
                             val bitmapUnprocessed = BitmapFactory.decodeFile(file.absolutePath)
                             bitmap = resizedBitmap(bitmapUnprocessed)
                             preview_image.setImageBitmap(bitmap)
+                            image_et.text = "Image picked!"
                         }
                     }
                 }

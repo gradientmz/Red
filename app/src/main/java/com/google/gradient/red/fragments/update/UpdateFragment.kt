@@ -86,6 +86,7 @@ class updateFragment : Fragment() {
                             }
                             bitmap = BitmapFactory.decodeFile(file.absolutePath)
                             preview_image.setImageBitmap(bitmap)
+                            current_image_et.text = "Image picked!"
                         }
                     }
                 }
