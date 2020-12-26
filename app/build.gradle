@@ -83,4 +83,7 @@ dependencies {
 
     // Easy permissions
     implementation 'pub.devrel:easypermissions:3.0.0'
+
+    // Palette library for finding average color
+    implementation 'androidx.palette:palette-ktx:1.0.0'
 }
