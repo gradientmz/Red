@@ -61,6 +61,8 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
             val color = dominantSwatch!!.rgb
 
             holder.itemView.imagecard.setCardBackgroundColor(color)
+        } else {
+            holder.itemView.imagecard.visibility = View.GONE
         }
 
         // Sets color of mood indicator card (dot) based on saved mood
