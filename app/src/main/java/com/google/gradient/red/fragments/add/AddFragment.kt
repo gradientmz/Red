@@ -2,7 +2,6 @@ package com.google.gradient.red.fragments.add
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -31,16 +30,11 @@ import java.util.*
 
 
 class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks {
-    lateinit var bitmap: Bitmap
+    var bitmap: Bitmap? = null
 
     private val mJournalViewModel: JournalViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
     var currentDate: String? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        var bitmap: Bitmap? = null
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,6 +62,11 @@ class addFragment : Fragment(), EasyPermissions.PermissionCallbacks, EasyPermiss
         }
 
         return view
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.clear()
     }
 
     // Handle result of picked image

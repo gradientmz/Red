@@ -15,5 +15,5 @@ data class JournalData(
     var mood: Mood,
     var description: String,
     var date: String,
-    var image: Bitmap
+    var image: Bitmap?
 ): Parcelable

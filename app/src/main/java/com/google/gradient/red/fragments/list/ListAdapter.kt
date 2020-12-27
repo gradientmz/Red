@@ -53,15 +53,15 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         holder.itemView.date.text = dataList[position].date
 
         // Checks if image exists
-        if (dataList[position].image.width > 0) {
+        if (dataList[position].image != null) {
             holder.itemView.image.setImageBitmap(dataList[position].image)
+
+            val palette = dataList[position].image?.let { Palette.Builder(it).generate() }
+            val dominantSwatch = palette?.dominantSwatch
+            val color = dominantSwatch!!.rgb
+
+            holder.itemView.imagecard.setCardBackgroundColor(color)
         }
-
-        val palette = Palette.Builder(dataList[position].image).generate()
-        val dominantSwatch = palette.dominantSwatch
-        val color = dominantSwatch!!.rgb
-
-        holder.itemView.imagecard.setCardBackgroundColor(color)
 
         // Sets color of mood indicator card (dot) based on saved mood
         val mood = dataList[position].mood

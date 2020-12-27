@@ -1,13 +1,15 @@
 package com.google.gradient.red.fragments.update
 
+import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.ThumbnailUtils
 import android.os.Bundle
 import android.provider.OpenableColumns
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -18,10 +20,11 @@ import com.google.gradient.red.R
 import com.google.gradient.red.data.models.JournalData
 import com.google.gradient.red.data.viewmodel.JournalViewModel
 import com.google.gradient.red.fragments.SharedViewModel
-import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_update.*
 import kotlinx.android.synthetic.main.fragment_update.view.*
+import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
+
 
 class updateFragment : Fragment() {
     lateinit var bitmap: Bitmap
@@ -30,11 +33,6 @@ class updateFragment : Fragment() {
     private val mSharedViewModel: SharedViewModel by viewModels()
     private val mJournalViewModel: JournalViewModel by viewModels()
     private val args by navArgs<updateFragmentArgs>()
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        var bitmap: Bitmap? = null
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +45,13 @@ class updateFragment : Fragment() {
         setHasOptionsMenu(true)
 
         // Get bitmap
-        bitmap = args.currentItem.image
+        if (args.currentItem.image != null) {
+            args.currentItem.image.also {
+                if (it != null) {
+                    bitmap = it
+                }
+            }
+        }
 
         view.current_title_et.setText(args.currentItem.title)
         view.current_description_et.setText(args.currentItem.description)
@@ -56,12 +60,19 @@ class updateFragment : Fragment() {
 
         // Opens gallery when image button clicked, gets image
         view.current_image_et.setOnClickListener {
+            readStorageTask()
+            //Intent to pick image
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            startActivityForResult(intent, 1218)
+            startActivityForResult(intent, 1001)
         }
 
         return view
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.clear()
     }
 
     // Handle result of picked image
@@ -84,14 +95,57 @@ class updateFragment : Fragment() {
                             os.use {
                                 inputStream.copyTo(it)
                             }
-                            bitmap = BitmapFactory.decodeFile(file.absolutePath)
-                            preview_image.setImageBitmap(bitmap)
+                            val bitmapUnprocessed = BitmapFactory.decodeFile(file.absolutePath)
+                            bitmap = resizedBitmap(bitmapUnprocessed)
                             current_image_et.text = "Image picked!"
                         }
                     }
                 }
             }
         }
+    }
+
+    // Resizes bitmap height to 1440 (2k res) and width based on dimensions
+    fun resizedBitmap(bitmap: Bitmap): Bitmap {
+        val width = bitmap.width
+        val height = bitmap.height
+        var bitmapResized: Bitmap? = null
+
+        Log.v("Image size return", "width: {$width}, height: {$height}")
+
+        val scale: Double = 1080 / bitmap.height.toDouble()
+        val scaleWidth: Double = scale * width
+        val scaleHeight: Double = scale * height
+
+        bitmapResized = ThumbnailUtils.extractThumbnail(
+            bitmap, scaleWidth.toInt(),
+            scaleHeight.toInt()
+        )
+
+        Log.v("Value on the right should return 1080", bitmapResized.height.toString())
+        return bitmapResized
+    }
+
+    // Checks if the user has permissions and asks for them if not
+    private fun readStorageTask() {
+        if (hasReadStoragePerm()) {
+
+        } else {
+            EasyPermissions.requestPermissions(
+                requireActivity(),
+                "This app needs access to your storage to be able to pick pictures.",
+                1001,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+        }
+    }
+
+    // This function checks whether the user has permissions using EasyPermissions
+    private fun hasReadStoragePerm(): Boolean {
+        return EasyPermissions.hasPermissions(
+            requireContext(),
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
     }
 
     // Creates check mark at the top of the fragment
