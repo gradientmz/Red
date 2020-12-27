@@ -89,9 +89,8 @@
                 android:id="@+id/image"
                 android:layout_width="wrap_content"
                 android:layout_height="170sp"
-                android:src="@drawable/ic_me"
                 android:visibility="visible"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
 
         </androidx.cardview.widget.CardView>
 
