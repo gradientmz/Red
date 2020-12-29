@@ -119,8 +119,10 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
             R.id.menu_info -> { context?.let { openLink("https://twitter.com/gradientmz", it) } }
 
             // Sort options
+
             R.id.sort_goodmood -> { mJournalViewModel.sortByGoodMood.observe(this, Observer { adapter.setData(it) }) }
             R.id.sort_badmood -> { mJournalViewModel.sortByBadMood.observe(this, Observer { adapter.setData(it) }) }
+            R.id.sort_time -> { mJournalViewModel.getAllData.observe(this, Observer { adapter.setData(it) }) }
         }
         return super.onOptionsItemSelected(item)
     }

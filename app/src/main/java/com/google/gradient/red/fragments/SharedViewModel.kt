@@ -24,14 +24,14 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
     // Listens for when mood selector changes
     val listener: AdapterView.OnItemSelectedListener = object :
         AdapterView.OnItemSelectedListener {
-        override fun onNothingSelected(p0: AdapterView<*>?) {}
+        override fun onNothingSelected(p0: AdapterView<*>?) {  }
 
         // Checks which option the spinner is on and sets text color
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             when(position) {
-                0 -> { (parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.pgreen)) }
-                1 -> { (parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.pblue)) }
-                2 -> { (parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.pred)) }
+                0 -> { (parent?.getChildAt(0) as? TextView)?.setTextColor(ContextCompat.getColor(application, R.color.pgreen)) }
+                1 -> { (parent?.getChildAt(0) as? TextView)?.setTextColor(ContextCompat.getColor(application, R.color.pblue)) }
+                2 -> { (parent?.getChildAt(0) as? TextView)?.setTextColor(ContextCompat.getColor(application, R.color.pred)) }
             }
         }
 

@@ -16,6 +16,9 @@
             android:title="Sort By">
             <menu>
                 <item
+                    android:id="@+id/sort_time"
+                    android:title="Time (default)"/>
+                <item
                     android:id="@+id/sort_goodmood"
                     android:title="Good mood"/>
                 <item
