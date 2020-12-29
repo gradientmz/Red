@@ -27,7 +27,7 @@ import java.io.File
 
 
 class updateFragment : Fragment() {
-    lateinit var bitmap: Bitmap
+    var bitmap: Bitmap? = null
 
     // Variables used later
     private val mSharedViewModel: SharedViewModel by viewModels()
@@ -44,7 +44,7 @@ class updateFragment : Fragment() {
         // Set menu
         setHasOptionsMenu(true)
 
-        // Get bitmap
+        // Get current bitmap if it exists and assign it to the bitmap var
         if (args.currentItem.image != null) {
             args.currentItem.image.also {
                 if (it != null) {
